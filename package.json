@@ -1,0 +1,17 @@
+{
+  "name": "nativeextractor.js",
+  "version": "1.0.0",
+  "description": "NativeExtractor bindings for Node.js",
+  "main": "nativeextractor.js",
+  "dependencies": {
+    "bindings": "~1.2.1",
+    "node-addon-api": "^1.7.2"
+  },
+  "scripts": {
+    "test": "node test.js",
+    "install": "node-gyp rebuild"
+  },
+  "gypfile": true,
+  "author": "SpongeData <info@spongedata.cz> (https://spongedata.cz/)",
+  "license": "MIT"
+}
