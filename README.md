@@ -1,7 +1,7 @@
 # nativeextractor.js
 > This is official (NativeExtractor)[https://github.com/SpongeData-cz/nativeextractor] binding for Node.js
 
-![NativeExtractor Logo](./logo.png)
+<p align="center"><img src="https://raw.githubusercontent.com/SpongeData-cz/nativeextractor/main/logo.svg" width="400" /></p>
 
 ![Python Logo](logo_nodejs.png)
 
