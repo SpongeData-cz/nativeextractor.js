@@ -13,5 +13,6 @@
   },
   "gypfile": true,
   "author": "SpongeData <info@spongedata.cz> (https://spongedata.cz/)",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": ["machine", "learning", "data", "mining", "datamining", "extraction", "entity", "text", "regex", "regexp", "glob", "keywords", "regular", "compiled", "tokenize", "token", "C", "native"]
 }
