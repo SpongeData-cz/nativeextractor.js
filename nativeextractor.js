@@ -97,15 +97,17 @@ class Extractor {
    * @param {Number} threads how many threads to use (0 will use all threads
    *                         on current machine)
    */
-  constructor(miners, batch, threads) {
+  constructor(miners, batch, threads, flags) {
     const defaults = {
       miners: [],
       batch: 1000,
       threads: 1,
+      flags: 0,
     };
     this.miners = defaults.miners;
     this.batch = batch || defaults.batch;
     this._extractor = ne.create_extractor(threads || defaults.threads);
+    this.flags = 0;
 
     miners = miners || defaults.miners;
     for (let miner of miners) {
@@ -116,6 +118,7 @@ class Extractor {
         );
       }
     }
+    this.setFlags(flags || defaults.flags);
   }
 
   /**
@@ -197,6 +200,28 @@ class Extractor {
     ne.unset_stream(this._extractor);
     this.stream = undefined;
     return this;
+  }
+
+  /**
+   * Sets flags for extractor.
+   *
+   * @param {Number} flags bit flag
+   *
+   * @return {Number} new flag setting
+   */
+  setFlags(flags) {
+    return this.flags = ne.set_flags(this._extractor, flags);
+  }
+
+  /**
+   * Unsets flags for extractor.
+   *
+   * @param {Number} flags bit flag
+   *
+   * @return {Number} new flag setting
+   */
+  unsetFlags(flags) {
+    return this.flags = ne.unset_flags(this._extractor, flags);
   }
 
   /**
@@ -325,6 +350,11 @@ class Extractor {
   }
 
 }
+
+/** Sort returned occurrences by position and length. */
+Extractor.SORT_RESULTS = (1<<0);
+/** Do not return enclosed occurrences. */
+Extractor.NO_ENCLOSED_OCCURRENCES = (1<<1);
 
 Extractor.extractMeta = function (path) {
   const ret = {};

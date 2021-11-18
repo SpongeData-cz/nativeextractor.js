@@ -506,6 +506,90 @@ Napi::Value unset_stream(const Napi::CallbackInfo &info) {
 }
 
 /**
+ * Sets flags to an extractor.
+ * 
+ * @param info[0] the extractor
+ * @param info[1] the flags
+ * 
+ * @return the current flags
+ */
+Napi::Value set_flags(const Napi::CallbackInfo &info) {
+  Napi::Env env = info.Env();
+  
+  if (info.Length() < 2) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+    return env.Null();
+  }
+
+  if (!info[0].IsNumber()) {
+    Napi::TypeError::New(env, "First argument must be extractor address")
+        .ThrowAsJavaScriptException();
+    return env.Null();
+  }
+
+  if (!info[1].IsNumber()) {
+    Napi::TypeError::New(env, "Second argument must be a bit flag")
+        .ThrowAsJavaScriptException();
+    return env.Null();
+  }
+
+  extractor_c *extractor = (extractor_c *) info[0]
+      .As<Napi::Number>()
+      .Int64Value();
+
+  unsigned stream = info[1]
+      .As<Napi::Number>()
+      .Int64Value();
+
+  extractor->set_flags(extractor, stream);
+
+  return Napi::Number::New(env, extractor->flags);
+}
+
+/**
+ * Unsets flags to an extractor.
+ * 
+ * @param info[0] the extractor
+ * @param info[1] the flags
+ * 
+ * @return the current flags
+ */
+Napi::Value unset_flags(const Napi::CallbackInfo &info) {
+  Napi::Env env = info.Env();
+  
+  if (info.Length() < 2) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+    return env.Null();
+  }
+
+  if (!info[0].IsNumber()) {
+    Napi::TypeError::New(env, "First argument must be extractor address")
+        .ThrowAsJavaScriptException();
+    return env.Null();
+  }
+
+  if (!info[1].IsNumber()) {
+    Napi::TypeError::New(env, "Second argument must be a bit flag")
+        .ThrowAsJavaScriptException();
+    return env.Null();
+  }
+
+  extractor_c *extractor = (extractor_c *) info[0]
+      .As<Napi::Number>()
+      .Int64Value();
+
+  unsigned stream = info[1]
+      .As<Napi::Number>()
+      .Int64Value();
+
+  extractor->unset_flags(extractor, stream);
+
+  return Napi::Number::New(env, extractor->flags);
+}
+
+/**
  * Returns the dlsymbols.
  * 
  * @param info[0] extractor
@@ -628,6 +712,8 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exportfn(free_file_stream);
   exportfn(set_stream);
   exportfn(unset_stream);
+  exportfn(set_flags);
+  exportfn(unset_flags);
   exportfn(stream_check);
   exportfn(dlsymbols);
   exportfn(extract_meta_node);
