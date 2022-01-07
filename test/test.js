@@ -116,6 +116,17 @@ describe("nativeextractor.js", function () {
       });
     });
 
+    it("should match trailing wildcards correctly", function (done) {
+      const buffer = "http://2432.spongedata.cz";
+      const ex = new ne.Extractor();
+      ex.addMiner(
+        path.join(ne.defaultMinersPath, "glob_entities.so"),
+        "match_glob",
+        "????"
+      );
+      doTest(ex, buffer, 2, done);
+    });
+
   });
 
 });
