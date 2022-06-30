@@ -1,5 +1,5 @@
 # nativeextractor.js
-> This is official (NativeExtractor)[https://github.com/SpongeData-cz/nativeextractor] binding for Node.js
+> This is official [NativeExtractor](https://github.com/SpongeData-cz/nativeextractor) binding for Node.js
 
 <p align="center"><img src="https://raw.githubusercontent.com/SpongeData-cz/nativeextractor/main/logo.svg" width="400" /></p>
 
